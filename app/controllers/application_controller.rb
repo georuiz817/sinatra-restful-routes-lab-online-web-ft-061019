@@ -16,7 +16,7 @@ class ApplicationController < Sinatra::Base
     erb :index
   end 
 
-
+#renders form to create new_recipe 
   get '/recipes/new' do 
     erb :new
   end 
@@ -25,12 +25,14 @@ class ApplicationController < Sinatra::Base
     @recipe = Recipe.create(name: params["name"], ingredients: params["ingredients"], cook_time: params["cook_time"])
     redirect "/recipes/#{@recipe.id}"
   end 
-
+#end
+#action that will display single recipe 
   get '/recipes/:id' do 
     @recipe = Recipe.find_by_id(params[:id])
     erb :show
   end 
-
+#end
+#action to edit single recipe 
   get '/recipes/:id/edit' do 
     @recipe = Recipe.find_by_id(params[:id])
     erb :edit
@@ -44,10 +46,12 @@ class ApplicationController < Sinatra::Base
     @recipe.save
     redirect "/recipes/#{@recipe.id}"
   end 
-
+#end 
+#action to delete recipe 
   delete '/recipes/:id' do 
     @recipe = Recipe.find_by_id(params[:id])
     @recipe.delete
     redirect '/recipes'
   end 
 end
+#end 
